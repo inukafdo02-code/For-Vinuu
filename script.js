@@ -1,59 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const startBtn = document.getElementById('start-btn');
-  const openingScreen = document.getElementById('opening-screen');
-  const mainContent = document.getElementById('main-content');
+  const openBtn = document.getElementById('open-btn');
+  const page1 = document.getElementById('page1');
+  const page2 = document.getElementById('page2');
   const bgMusic = document.getElementById('bg-music');
-  const musicToggle = document.getElementById('music-toggle');
-  const envelope = document.getElementById('envelope');
   const particlesContainer = document.getElementById('particles-container');
 
-  // Start Experience
-  startBtn.addEventListener('click', () => {
-    openingScreen.classList.add('hidden');
-    mainContent.classList.remove('hidden');
-    musicToggle.classList.remove('hidden');
+  openBtn.addEventListener('click', () => {
+    // Hide First Page & Show Second Page
+    page1.classList.add('hidden');
+    page2.classList.remove('hidden');
 
-    // Play Music
-    bgMusic.play().catch(() => {
-      console.log('Autoplay prevented');
+    // Play Music "Until I Found You"
+    bgMusic.play().catch(err => {
+      console.log("Audio play error: ", err);
     });
 
-    // Start Floating Particles
-    createParticles();
+    // Start Floating Hearts & Sparkles Background
+    createHearts();
   });
 
-  // Music Toggle
-  musicToggle.addEventListener('click', () => {
-    if (bgMusic.paused) {
-      bgMusic.play();
-      musicToggle.textContent = '🎵';
-    } else {
-      bgMusic.pause();
-      musicToggle.textContent = '🔇';
-    }
-  });
-
-  // Open Letter
-  envelope.addEventListener('click', () => {
-    envelope.classList.add('open');
-  });
-
-  // Create Floating Hearts & Stars
-  function createParticles() {
-    const symbols = ['❤️', '✨', '🧸', '🌸'];
+  function createHearts() {
+    const items = ['❤️', '✨', '💖', '🧸', '🌸'];
     setInterval(() => {
       const particle = document.createElement('div');
       particle.classList.add('particle');
-      particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      particle.textContent = items[Math.floor(Math.random() * items.length)];
       particle.style.left = Math.random() * 100 + 'vw';
-      particle.style.animationDuration = Math.random() * 3 + 4 + 's';
-      particle.style.fontSize = Math.random() * 12 + 12 + 'px';
-      
+      particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      particle.style.fontSize = (Math.random() * 10 + 14) + 'px';
+
       particlesContainer.appendChild(particle);
 
       setTimeout(() => {
         particle.remove();
       }, 7000);
-    }, 400);
+    }, 350);
   }
 });
