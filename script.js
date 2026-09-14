@@ -146,7 +146,7 @@ function openMusic() {
    */
 
   const musicLink =
-    "YOUR_YOUTUBE_LINK_HERE";
+    "https://youtu.be/cNGjD0VG4R8?si=4sGfeD3SJ89n29XR";
 
 
   if (
